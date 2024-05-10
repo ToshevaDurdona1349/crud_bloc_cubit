@@ -34,10 +34,11 @@ class HomePostListState extends HomeState {
 }
 
 class HomeDeletePostState extends HomeState {
-  late final Post post;
+   final Post post;
 
-  // HomeDeletePostState(this.post);
+  HomeDeletePostState(this.post);
 
   @override
   List<Object> get props => [post];
 }
+

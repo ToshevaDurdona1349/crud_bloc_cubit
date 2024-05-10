@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/home_cubit/home_cubit.dart';
 import '../bloc/home_cubit/home_state.dart';
 import '../models/post_model.dart';
+import '../services/log_service.dart';
 import '../widget/iem_of_home.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,13 +21,14 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     homeCubit=BlocProvider.of<HomeCubit>(context);
+    homeCubit.loadPosts();
     homeCubit.stream.listen((state) {
       if (state is HomeDeletePostState) {
-        // homeCubit.add(viewOfPostList());
+        LogService.d('HomeDeletePostState is done');
+        homeCubit.loadPosts();
 
       }
     });
-    homeCubit.loadPosts();
   }
 
   @override

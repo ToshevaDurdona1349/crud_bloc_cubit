@@ -32,16 +32,15 @@ class HomeCubit extends Cubit <HomeState>{
   Future<void>deletePost(Post post) async {
     emit(HomeLoadingState());
 
-  var response = await Network.DEL(Network.API_POST_DELETE + post.id.toString(),
+    var response = await Network.DEL(Network.API_POST_DELETE + post.id.toString(),
       Network.paramsEmpty());
     if (response != null) {
-      emit(HomeDeletePostState());
+      emit(HomeDeletePostState(post));
     } else {
       emit(HomeErrorState('Could not delete post'));
     }
-  LogService.d(response!);
-  loadPosts();
-}
+     LogService.d(response!);
+ }
 
   Future callCreatePage(BuildContext context) async {
   bool result = await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
